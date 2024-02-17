@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Detection {% endblock %}
+
+{% block body %}
+
+<h3>Upload your file for object detection</h3>
+
+<div class="bg-warning p-5">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-outline-dark my-3">Upload</button>
+    </form>
+</div>
+
+{% if result_file_path %}
+<div>
+    {% if fyle_type == "img" %}
+    <img src="/media/{{result_file_path}}" alt="result image" height='450px'>
+    {% elif fyle_type == "vdo" %}
+    <video width="640" height="360" controls>
+        <source src="{{result_file_path}}" type="video/mp4">
+    </video>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
